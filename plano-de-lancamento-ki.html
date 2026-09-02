@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plano de Lançamento — Ki, Sua Assistente Virtual IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbf9f5; --panel:#ffffff; --line:#e7e0d2;
+    --ink:#211c14; --ink-body:#5c5344; --ink-faint:#948a76;
+    --gold:#a97b2f; --gold-light:#c9973f; --gold-deep:#7a5a20;
+    --gold-bg:#f6ecd8;
+    --ok:#2f7d4f; --pending:#b5502b;
+    --maxw: 880px;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif; font-size:15.5px; line-height:1.65; }
+  .wrap { max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+  h1,h2,h3 { font-family:'Poppins',sans-serif; font-weight:700; margin:0; color:var(--ink); letter-spacing:-.01em; }
+  p { margin:0; }
+  a { color:var(--gold-deep); }
+
+  header.doc { background:linear-gradient(135deg,#1c150c,#2c2013); color:#f4eee1; padding:56px 0 44px; }
+  header.doc .eyebrow { font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#e0c07f; margin-bottom:14px; }
+  header.doc h1 { font-size:clamp(26px,4vw,36px); color:#faf4e6; margin-bottom:12px; }
+  header.doc p { color:#c9bda3; font-size:15px; max-width:60ch; }
+  header.doc .meta { margin-top:22px; display:flex; gap:24px; flex-wrap:wrap; font-family:'JetBrains Mono',monospace; font-size:12px; color:#b8a985; }
+
+  section.intro { padding:36px 0; border-bottom:1px solid var(--line); }
+  section.intro p { color:var(--ink-body); font-size:15.5px; }
+
+  .drive-box { background:var(--gold-bg); border:1px solid #e6d3a3; border-radius:10px; padding:22px 26px; margin:26px 0; }
+  .drive-box h3 { font-size:15px; margin-bottom:8px; color:var(--gold-deep); }
+  .drive-box p { color:#6b5a34; font-size:14.5px; }
+  .drive-box code { background:#fff; border:1px solid #e6d3a3; padding:2px 6px; border-radius:4px; font-family:'JetBrains Mono',monospace; font-size:13px; }
+
+  .phase { padding:44px 0; border-bottom:1px solid var(--line); }
+  .phase-head { display:flex; align-items:center; gap:16px; margin-bottom:22px; }
+  .phase-num { width:44px; height:44px; border-radius:10px; background:var(--ink); color:#f0cf87; display:flex; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-weight:700; font-size:18px; flex:none; }
+  .phase-head h2 { font-size:22px; }
+  .phase-head .owner { font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; padding:4px 10px; border-radius:20px; margin-left:auto; white-space:nowrap; }
+  .owner.alisson { background:#fbe6de; color:var(--pending); }
+  .owner.samurai { background:#e2ede6; color:var(--ok); }
+  .owner.ambos { background:var(--gold-bg); color:var(--gold-deep); }
+
+  .task { display:flex; gap:14px; padding:16px 0; border-top:1px solid var(--line); }
+  .task:first-of-type { border-top:none; }
+  .task input[type=checkbox] { width:19px; height:19px; margin-top:2px; accent-color:var(--gold); flex:none; }
+  .task .t-body h4 { font-size:15px; font-weight:600; margin-bottom:4px; }
+  .task .t-body p { color:var(--ink-body); font-size:14.5px; }
+  .task .t-body .who { display:inline-block; margin-top:8px; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); }
+
+  .callout { background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:8px; padding:18px 22px; margin-top:18px; }
+  .callout p { color:var(--ink-body); font-size:14px; }
+  .callout strong { color:var(--ink); }
+
+  .done-section { padding:44px 0; border-bottom:1px solid var(--line); background:#f4f0e6; }
+  .done-section h2 { font-size:22px; margin-bottom:6px; }
+  .done-section > .wrap > p.sub { color:var(--ink-body); font-size:14.5px; margin-bottom:28px; }
+  .done-group { margin-bottom:28px; }
+  .done-group:last-child { margin-bottom:0; }
+  .done-group h3 { font-size:13px; font-family:'JetBrains Mono',monospace; letter-spacing:.08em; text-transform:uppercase; color:var(--gold-deep); margin-bottom:14px; }
+  .done-item { display:flex; gap:12px; padding:10px 0; }
+  .done-check { width:20px; height:20px; border-radius:50%; background:var(--ok); color:#fff; display:flex; align-items:center; justify-content:center; flex:none; font-size:12px; margin-top:1px; }
+  .done-item .d-body h4 { font-size:14.5px; font-weight:600; margin-bottom:2px; }
+  .done-item .d-body p { color:var(--ink-body); font-size:13.5px; }
+
+  footer.doc { padding:40px 0 60px; text-align:center; }
+  footer.doc p { color:var(--ink-faint); font-size:13px; font-family:'JetBrains Mono',monospace; }
+
+  @media print {
+    header.doc { background:#1c150c !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+</style>
+</head>
+<body>
+
+<header class="doc">
+  <div class="wrap">
+    <p class="eyebrow">Plano de lançamento</p>
+    <h1>Ki — Sua Assistente Virtual IA</h1>
+    <p>Documento de acompanhamento do lançamento comercial da Ki, dividido em fases. Cada tarefa mostra de quem ela depende — Dr. Alisson ou Samurai — para ficar claro o que falta em cada etapa.</p>
+    <div class="meta">
+      <span>Atualizado por Samurai</span>
+      <span>Uso interno — Ki / Samurai Dores de Coluna</span>
+    </div>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <p>Este documento acompanha, fase por fase, tudo o que falta para a Ki estar 100% pronta para vender — desde a configuração de pagamentos até a automação de acesso dos clientes. Marque as caixinhas conforme for concluindo (a marcação é só visual, não salva sozinha — é um guia de acompanhamento).</p>
+
+    <div class="drive-box">
+      <h3>📁 Como me enviar o que for pedido</h3>
+      <p>Use a conta do Google Drive que já criamos só para este projeto. Dentro dela, crie uma pasta chamada <code>Ki - Entregas Dr. Alisson</code> caso ainda não exista. Para cada fase abaixo, salve os arquivos/links pedidos dentro dela, numa subpasta com o nome da fase (ex: <code>Fase 1 - Mercado Pago</code>). Assim que eu tiver acesso à pasta, eu já vejo e sigo com o próximo passo — não precisa me avisar por WhatsApp toda vez, mas pode avisar se preferir.</p>
+    </div>
+  </div>
+</section>
+
+<section class="done-section">
+  <div class="wrap">
+    <h2>✅ O que já foi feito</h2>
+    <p class="sub">Tudo abaixo já está pronto e funcionando no site. Deixo detalhado aqui pra você acompanhar o tanto de coisa que já saiu do papel.</p>
+
+    <div class="done-group">
+      <h3>Limpeza e organização técnica</h3>
+      <div class="done-item"><div class="done-check">✓</div><div class="d-body"><h4>Site reduzido de 20 para 7 plugins</h4><p>Removemos WooCommerce e tudo que dependia dele (Subscriptions For WooCommerce, Paid Member Subscriptions, Mercado Pago plugin antigo, Better Payment, WooCommerce Direct Checkout, WPS PayPal), além de Kubio, Envato Elements, Starter Templates, WP File Manager, Loco Translate, WP Headers And Footers, Meta Pixel for WordPress, EmbedPress, RTMForm Builder, RTMKit Addons, Nextend Social Login, PRO Elements, Essential Addons e Ultimate Addons. Hoje só ficam: All-in-One WP Migration, Elementor, Joinchat, LiteSpeed Cache, PixelYourSite, Ultimate Member e WPForms Lite.</p></div></div>
+      <div class="done-item"><div class="done-check">✓</div><div class="d-body"><h4>Decisão de arquitetura: sem loja, sem carrinho</h4><p>Trocamos todo o sistema de venda do WooCommerce por links diretos do Mercado Pago (Planos de Assinatura), o que elimina a necessidade de manter uma loja completa dentro do WordPress.</p></div></div>
+    </div>
+
+    <div class="done-group">
+      <h3>Páginas do site</h3>
+      <div class="done-item"><div class="done-check">✓</div><div class="d-body"><h4>Home reconstruída em HTML/CSS puro</h4><p>Página do case da clínica (Dr. Alisson, tratamento, "Porque Samurai?", depoimentos), com o mesmo visual dourado/preto do restante do site, vídeos reais incorporados e botão "Ver mais no Instagram" no lugar de uma página de depoimentos separada.</p></div></div>
+      <div class="done-item"><div class="done-check">✓</div><div class="d-body"><h4>About Us reconstruída</h4><p>Biografia completa, credencial CREFITO, e as 3 frentes pessoais (Fisioterapia, Yôga, Fisiculturismo).</p></div></div>
+      <div class="done-item"><div class="done-check">✓</div><div class="d-body"><h4>Contact Us reconstruída</h4><p>Endereço, telefone, e-mail e mapa interativo, tudo com dado real.</p></div></div>
+      <div class="done-item"><div class="done-check">✓</div><div class="d-body"><h4>Página de Services removida do plano</h4><p>Decidimos que não é necessária por enquanto.</p></div></div>
+      <div class="done-item"><div class="done-check">✓</div><div class="d-body"><h4>Menu consistente entre as páginas</h4><p>Home / About Us / Contact Us aparecem em todas, com um menu "hambúrguer" funcional no celular.</p></div></div>
+      <div class="done-item"><div class="done-check">✓</div><div class="d-body"><h4>Páginas antigas sem uso removidas</h4><p>Account, Faça Login, Finalização de compra, Inscrição, Minha conta, Password Reset, Register, Carrinho, Loja, área de membros, Política de reembolso, Testimonial e Blog foram todas movidas pra lixeira.</p></div></div>
+    </div>
+
+    <div class="done-group">
+      <h3>Login e área de acesso</h3>
+      <div class="done-item"><div class="done-check">✓</div><div class="d-body"><h4>Nova página de Login funcionando</h4><p>Feita com o Ultimate Member (sem Elementor), com visual dourado/preto e botão de "Ver planos" no lugar do cadastro público — porque decidimos que contas só podem ser criadas automaticamente após o pagamento.</p></div></div>
+      <div class="done-item"><div class="done-check">✓</div><div class="d-body"><h4>Configurações e Instruções reconstruída e protegida</h4><p>Central com os 17 vídeos-tutoriais reais (instalação, APIs de IA, prompts, integrações, WACRM), barra de progresso que salva o quanto o cliente já assistiu, botões de Download I.A./CRM, e um botão de "implementação feita para mim" pra quem preferir que a equipe instale tudo.</p></div></div>
+      <div class="done-item"><div class="done-check">✓</div><div class="d-body"><h4>Acesso restrito só a quem está logado</h4><p>Só usuários logados conseguem ver a página de Configurações e Instruções — testado e confirmado funcionando.</p></div></div>
+      <div class="done-item"><div class="done-check">✓</div><div class="d-body"><h4>Botão "Área de Membros" da página principal corrigido</h4><p>Antes apontava para uma página que não existe mais; agora leva direto pra Configurações e Instruções.</p></div></div>
+    </div>
+
+    <div class="done-group">
+      <h3>Rastreamento</h3>
+      <div class="done-item"><div class="done-check">✓</div><div class="d-body"><h4>PixelYourSite conectado à nossa auditoria via IA</h4><p>Já identificamos que nenhum pixel de rastreamento (Facebook, Google Analytics etc.) está configurado ainda — fica pendente pra quando formos cuidar de anúncios.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="intro" style="border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <h2 style="font-size:20px; margin-bottom:10px;">O que falta</h2>
+    <p>As fases abaixo mostram exatamente o que ainda precisa acontecer pra Ki estar pronta pra vender de verdade.</p>
+  </div>
+
+<div class="phase">
+  <div class="wrap">
+    <div class="phase-head">
+      <div class="phase-num">1</div>
+      <h2>Configurar o recebimento de pagamentos</h2>
+      <span class="owner alisson">Depende do Dr. Alisson</span>
+    </div>
+
+    <div class="task">
+      <input type="checkbox">
+      <div class="t-body">
+        <h4>Criar o Plano Basic no Mercado Pago</h4>
+        <p>Ferramentas de venda → Assinaturas → Criar plano. Nome: "Plano Basic". Valor: R$ 39,00. Frequência: Mensal.</p>
+        <span class="who">Salvar o link gerado na pasta "Fase 1"</span>
+      </div>
+    </div>
+    <div class="task">
+      <input type="checkbox">
+      <div class="t-body">
+        <h4>Criar o Plano Business no Mercado Pago</h4>
+        <p>Mesmo caminho. Nome: "Plano Business". Valor: R$ 79,00. Frequência: Mensal.</p>
+        <span class="who">Salvar o link gerado na pasta "Fase 1"</span>
+      </div>
+    </div>
+    <div class="task">
+      <input type="checkbox">
+      <div class="t-body">
+        <h4>Criar o link de Suporte Técnico</h4>
+        <p>Ferramentas de venda → Link de pagamento (não é assinatura, é avulso). Nome: "Suporte Técnico". Valor: R$ 149,00.</p>
+        <span class="who">Salvar o link gerado na pasta "Fase 1"</span>
+      </div>
+    </div>
+    <div class="task">
+      <input type="checkbox">
+      <div class="t-body">
+        <h4>Gerar o Access Token de produção</h4>
+        <p>No painel do Mercado Pago, vá em "Suas integrações". Se não tiver uma aplicação criada, crie uma (pode usar o nome "Ki"). Copie o Access Token de produção.</p>
+        <span class="who">Salvar num arquivo de texto simples dentro da pasta "Fase 1" — não precisa de nenhuma formatação especial</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Por que isso é só seu?</strong> Esses links e o token são gerados dentro da sua conta pessoal do Mercado Pago (é ela que recebe o dinheiro das vendas), então só você tem acesso pra criar isso. Depois que estiver na pasta do Drive, eu cuido de todo o resto.</p>
+    </div>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="wrap">
+    <div class="phase-head">
+      <div class="phase-num">2</div>
+      <h2>Automação de acesso dos clientes</h2>
+      <span class="owner samurai">Comigo (Samurai)</span>
+    </div>
+
+    <div class="task">
+      <input type="checkbox">
+      <div class="t-body">
+        <h4>Ligar o Mercado Pago a um sistema de automação (Make)</h4>
+        <p>Uso o Access Token da Fase 1 para configurar um fluxo que recebe o aviso de pagamento aprovado automaticamente.</p>
+      </div>
+    </div>
+    <div class="task">
+      <input type="checkbox">
+      <div class="t-body">
+        <h4>Criar a conta do cliente automaticamente</h4>
+        <p>Assim que o pagamento é aprovado, o sistema cria o login do cliente no site e libera o acesso à área de Configurações e Instruções.</p>
+      </div>
+    </div>
+    <div class="task">
+      <input type="checkbox">
+      <div class="t-body">
+        <h4>Enviar e-mail automático com os dados de acesso</h4>
+        <p>O cliente recebe usuário e senha por e-mail, em segundos, sem ninguém precisar criar a conta manualmente.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="wrap">
+    <div class="phase-head">
+      <div class="phase-num">3</div>
+      <h2>Teste de ponta a ponta</h2>
+      <span class="owner ambos">Os dois</span>
+    </div>
+
+    <div class="task">
+      <input type="checkbox">
+      <div class="t-body">
+        <h4>Fazer uma compra de teste</h4>
+        <p>Um de nós compra o Plano Basic de verdade (ou usa o simulador de testes do Mercado Pago) pra confirmar que tudo funciona: pagamento → criação de conta → e-mail → login → acesso liberado.</p>
+      </div>
+    </div>
+    <div class="task">
+      <input type="checkbox">
+      <div class="t-body">
+        <h4>Revisar o conteúdo de Configurações e Instruções</h4>
+        <p>Conferir se os vídeos, os links de download e as instruções estão certos e atualizados.</p>
+        <span class="who">Se algum vídeo mudou, me manda o novo link pela pasta do Drive</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="wrap">
+    <div class="phase-head">
+      <div class="phase-num">4</div>
+      <h2>Lançamento</h2>
+      <span class="owner ambos">Os dois</span>
+    </div>
+
+    <div class="task">
+      <input type="checkbox">
+      <div class="t-body">
+        <h4>Ativar os botões de compra no site</h4>
+        <p>Trocar os botões "Compre Já" da página principal pelos links reais do Mercado Pago (Fase 1).</p>
+      </div>
+    </div>
+    <div class="task">
+      <input type="checkbox">
+      <div class="t-body">
+        <h4>Divulgar</h4>
+        <p>Compartilhar o link do site nos canais que já existem (Instagram @ki.assistentevirtual, WhatsApp, indicações de clientes da clínica).</p>
+        <span class="who">Dr. Alisson: avisar quando quiser começar a divulgar</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="phase" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="phase-head">
+      <div class="phase-num">5</div>
+      <h2>Pós-venda</h2>
+      <span class="owner ambos">Os dois</span>
+    </div>
+
+    <div class="task">
+      <input type="checkbox">
+      <div class="t-body">
+        <h4>Acompanhar cancelamentos no Mercado Pago</h4>
+        <p>Como não temos um sistema automático de bloqueio, é importante checar de vez em quando o painel do Mercado Pago pra ver se algum cliente cancelou, e remover o acesso dele manualmente se precisar.</p>
+        <span class="who">Dr. Alisson: dar uma olhada semanal no painel</span>
+      </div>
+    </div>
+    <div class="task">
+      <input type="checkbox">
+      <div class="t-body">
+        <h4>Pedidos de "implementação feita para mim"</h4>
+        <p>Clientes que clicarem nesse botão vão chamar no WhatsApp de suporte técnico. Combinar entre vocês dois quem vai atender esses casos.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="doc">
+  <div class="wrap">
+    <p>Ki — Sua Inteligência para o Futuro do Seu Negócio · Documento gerado para acompanhamento interno</p>
+  </div>
+</footer>
+
+</body>
+</html>
